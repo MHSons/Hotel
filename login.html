@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Login — Fast Bites</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.5.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+  <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm">
+    <h1 class="text-2xl font-bold text-center mb-4">🔐 Admin Login</h1>
+    <p class="text-gray-600 text-center mb-6">Enter your PIN to access dashboard</p>
+
+    <form id="loginForm" class="space-y-4">
+      <input type="password" id="adminPin" placeholder="Enter 4-digit PIN" maxlength="4" class="w-full border p-2 rounded text-center text-lg tracking-widest" required>
+      <button type="submit" class="w-full bg-red-600 text-white py-2 rounded font-semibold">Login</button>
+    </form>
+
+    <p id="error" class="text-red-600 text-center mt-4 hidden">❌ Wrong PIN. Try again.</p>
+  </div>
+
+  <script>
+    // ✅ Set your secret PIN here
+    const ADMIN_PIN = "1234";
+
+    document.getElementById("loginForm").onsubmit = (e) => {
+      e.preventDefault();
+      const pin = document.getElementById("adminPin").value;
+      if (pin === ADMIN_PIN) {
+        localStorage.setItem("admin_access", "true");
+        window.location.href = "admin.html";
+      } else {
+        document.getElementById("error").classList.remove("hidden");
+      }
+    };
+  </script>
+</body>
+</html>
