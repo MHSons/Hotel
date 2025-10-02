@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery — Mellow Cheez</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-50">
+  <header class="bg-yellow-500 text-white shadow">
+    <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Logo" class="h-10 w-10 object-contain" onerror="this.style.display='none'">
+        <h1 class="text-xl font-bold">Gallery</h1>
+      </div>
+      <nav class="space-x-3">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="order.html">Order</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4">Gallery</h2>
+    <div id="gallery-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      const gallery = getGallery();
+      const grid = document.getElementById('gallery-grid');
+      if(!gallery.length) {
+        grid.innerHTML = `<div class="p-6 bg-white rounded shadow">No images yet. Add via Admin.</div>`;
+        return;
+      }
+      gallery.forEach(g => {
+        const el = document.createElement('div');
+        el.className = 'bg-white rounded shadow overflow-hidden';
+        el.innerHTML = `<img src="${g.url}" onerror="this.style.display='none'" class="w-full h-56 object-cover">`;
+        grid.appendChild(el);
+      });
+    });
+  </script>
+</body>
+</html>
