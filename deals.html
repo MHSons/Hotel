@@ -3,54 +3,67 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Deals — Mellow Cheez</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Deals & Offers — Fast Bites</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.5.2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-gray-50">
-  <header class="bg-yellow-500 text-white shadow">
-    <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
-      <div class="flex items-center gap-3">
-        <img src="assets/logo.png" alt="Logo" class="h-10 w-10 object-contain" onerror="this.style.display='none'">
-        <h1 class="text-xl font-bold">Deals</h1>
-      </div>
-      <nav class="space-x-3">
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="order.html">Order</a>
-        <a href="admin.html">Admin</a>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow p-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">🍔 Fast Bites</h1>
+      <nav class="flex gap-4">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="menu.html" class="hover:underline">Menu</a>
+        <a href="deals.html" class="text-red-600 font-semibold">Deals</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto p-6">
-    <h2 class="text-2xl font-bold mb-4">Special Deals</h2>
-    <div id="deals-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  <!-- Hero Section -->
+  <section class="bg-red-600 text-white py-20 text-center">
+    <h2 class="text-4xl font-extrabold">🔥 Special Deals & Combos</h2>
+    <p class="mt-2 text-lg">Grab your favorite meal at an unbeatable price!</p>
+  </section>
+
+  <!-- Deals Section -->
+  <main class="max-w-6xl mx-auto p-6 grid md:grid-cols-3 gap-8">
+
+    <!-- Deal Card 1 -->
+    <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+      <img src="https://images.unsplash.com/photo-1606755962773-d324f1f3f5c8?auto=format&fit=crop&w=800&q=80" alt="Deal 1" class="rounded-lg mb-4">
+      <h3 class="text-xl font-bold">🍔 Burger Combo Meal</h3>
+      <p class="text-gray-600 mt-2">2 Zinger Burgers + 2 Fries + 2 Drinks</p>
+      <p class="mt-4 text-red-600 text-2xl font-bold">Rs. 899 <span class="text-gray-400 line-through text-lg">Rs. 1200</span></p>
+      <a href="order.html" class="block mt-4 bg-red-600 text-white py-2 text-center rounded hover:bg-red-700">Order Now</a>
+    </div>
+
+    <!-- Deal Card 2 -->
+    <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+      <img src="https://images.unsplash.com/photo-1590080875832-9eac3a5cc0b1?auto=format&fit=crop&w=800&q=80" alt="Deal 2" class="rounded-lg mb-4">
+      <h3 class="text-xl font-bold">🍗 Family Feast</h3>
+      <p class="text-gray-600 mt-2">8 pcs Fried Chicken + 2 Large Fries + 1.5L Drink</p>
+      <p class="mt-4 text-red-600 text-2xl font-bold">Rs. 1999 <span class="text-gray-400 line-through text-lg">Rs. 2500</span></p>
+      <a href="order.html" class="block mt-4 bg-red-600 text-white py-2 text-center rounded hover:bg-red-700">Order Now</a>
+    </div>
+
+    <!-- Deal Card 3 -->
+    <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+      <img src="https://images.unsplash.com/photo-1612197527762-442fbb3a7c9d?auto=format&fit=crop&w=800&q=80" alt="Deal 3" class="rounded-lg mb-4">
+      <h3 class="text-xl font-bold">🥤 Student Snack Pack</h3>
+      <p class="text-gray-600 mt-2">1 Burger + Fries + Drink</p>
+      <p class="mt-4 text-red-600 text-2xl font-bold">Rs. 499 <span class="text-gray-400 line-through text-lg">Rs. 650</span></p>
+      <a href="order.html" class="block mt-4 bg-red-600 text-white py-2 text-center rounded hover:bg-red-700">Order Now</a>
+    </div>
+
   </main>
 
-  <script src="script.js"></script>
-  <script>
-    window.addEventListener('load', () => {
-      const grid = document.getElementById('deals-grid');
-      const deals = getDeals();
-      if(!deals.length) {
-        grid.innerHTML = `<div class="p-6 bg-white rounded shadow">No deals yet. Go to Admin to add.</div>`;
-        return;
-      }
-      deals.forEach(d => {
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded shadow p-4';
-        card.innerHTML = `
-          <img src="${d.image||''}" onerror="this.style.display='none'" class="h-36 w-full object-cover rounded mb-3">
-          <h3 class="font-bold">${d.name}</h3>
-          <p class="text-sm text-gray-600">${d.desc||''}</p>
-          <div class="mt-3 flex justify-between items-center">
-            <div class="font-semibold">Rs ${d.price}</div>
-            <button onclick="addDealToCart(${d.id})" class="bg-yellow-500 text-white px-3 py-1 rounded">Add Deal</button>
-          </div>`;
-        grid.appendChild(card);
-      });
-    });
-  </script>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-4 mt-10">
+    © 2025 Fast Bites — All Rights Reserved.
+  </footer>
+
 </body>
 </html>
