@@ -1,61 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Menu — Mellow Cheez</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Fast Food</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-gray-50">
-  <header class="bg-yellow-500 text-white shadow">
-    <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
-      <div class="flex items-center gap-3">
-        <img src="assets/logo.png" alt="Logo" class="h-10 w-10 object-contain" onerror="this.style.display='none'">
-        <h1 class="text-xl font-bold">Menu</h1>
-      </div>
-      <nav class="space-x-3">
-        <a href="index.html">Home</a>
-        <a href="menu.html" class="font-semibold">Menu</a>
-        <a href="order.html">Order</a>
-        <a href="admin.html">Admin</a>
-      </nav>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-red-600 p-4 text-white flex justify-between">
+    <h1 class="text-xl font-bold">🍔 Fast Food</h1>
+    <div>
+      <a href="index.html" class="px-2">Home</a>
+      <a href="menu.html" class="px-2 font-bold">Menu</a>
+      <a href="deals.html" class="px-2">Deals</a>
+      <a href="gallery.html" class="px-2">Gallery</a>
+      <a href="order.html" class="px-2">Order</a>
+      <a href="contact.html" class="px-2">Contact</a>
+      <a href="admin.html" class="px-2">Admin</a>
     </div>
-  </header>
+  </nav>
 
-  <main class="max-w-6xl mx-auto p-6">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold">All Menu Items</h2>
-      <a href="admin.html#menu" class="bg-yellow-500 text-white px-3 py-2 rounded">Manage Menu</a>
-    </div>
+  <!-- Page Title -->
+  <section class="text-center py-10">
+    <h2 class="text-3xl font-bold">Our Menu</h2>
+    <p class="text-gray-600">Delicious food at the best prices!</p>
+  </section>
 
-    <div id="menu-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-  </main>
+  <!-- Menu Grid -->
+  <section class="px-10 grid md:grid-cols-3 gap-6" id="menuList">
+    <!-- Menu items will load dynamically -->
+  </section>
 
-  <script src="script.js"></script>
-  <script>
-    window.addEventListener('load', () => {
-      const grid = document.getElementById('menu-grid');
-      const menu = getMenu();
-      if(!menu.length) {
-        grid.innerHTML = `<div class="p-6 bg-white rounded shadow">No menu items yet. Go to Admin to add.</div>`;
-        return;
-      }
-      menu.forEach(it => {
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded shadow p-4';
-        card.innerHTML = `
-          <img src="${it.image||''}" onerror="this.style.display='none'" class="h-44 w-full object-cover rounded mb-3">
-          <h3 class="font-bold text-lg">${it.name}</h3>
-          <div class="text-sm text-gray-600">${it.category||''}</div>
-          <p class="mt-2 text-gray-700">${it.desc||''}</p>
-          <div class="flex items-center justify-between mt-3">
-            <div class="font-semibold">Rs ${it.price}</div>
-            <button onclick="addToCart(${it.id})" class="bg-yellow-500 text-white px-3 py-1 rounded">Add</button>
-          </div>`;
-        grid.appendChild(card);
-      });
-    });
-  </script>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center p-4 mt-10">
+    © 2025 Fast Food Restaurant. All Rights Reserved.
+  </footer>
+
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
