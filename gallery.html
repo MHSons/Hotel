@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gallery - Mellow Cheez</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Gallery</h1>
+    <div id="gallery"></div>
+  </main>
+
+  <script>
+    // Simple gallery example (images manually added for now)
+    const galleryDiv = document.getElementById('gallery');
+    const images = ["assets/food1.jpg", "assets/food2.jpg", "assets/food3.jpg"];
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = "gallery-img";
+      galleryDiv.appendChild(img);
+    });
+  </script>
+</body>
+</html>
