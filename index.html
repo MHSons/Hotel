@@ -1,37 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mellow Cheez - Fast Food Restaurant</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mellow Cheez - Home</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <img src="assets/logo.png" alt="Logo" id="logo" />
-    <h1>Mellow Cheez</h1>
+  <header>
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <main class="container">
-    <section id="menu">
-      <h2>Menu</h2>
-      <div id="menu-items"></div>
-    </section>
-
-    <section id="cart">
-      <h2>Order Online</h2>
-      <form id="orderForm">
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="tel" name="phone" placeholder="Phone" required />
-        <textarea name="address" placeholder="Address" required></textarea>
-        <div id="cart-list"></div>
-        <div class="total">Total: Rs <span id="totalAmount">0</span></div>
-        <button type="submit">Place Order</button>
-      </form>
-      <div id="msg"></div>
-    </section>
+  <main>
+    <h1>Welcome to Mellow Cheez</h1>
+    <p>Fresh. Fast. Delicious.</p>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
