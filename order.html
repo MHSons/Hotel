@@ -3,131 +3,250 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Order — Mellow Cheez</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <title>Order — Fast Bites</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.5.2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-gray-50">
-  <header class="bg-yellow-500 text-white">
-    <div class="max-w-6xl mx-auto p-4 flex justify-between">
-      <h1 class="text-lg font-bold">Place Order</h1>
-      <a href="admin.html" class="bg-white text-yellow-600 px-3 py-1 rounded">Admin</a>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow p-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">🍔 Fast Bites</h1>
+      <nav class="flex gap-4">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="menu.html" class="hover:underline">Menu</a>
+        <a href="deals.html" class="hover:underline">Deals</a>
+        <a href="gallery.html" class="hover:underline">Gallery</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
+      </nav>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto p-6 grid lg:grid-cols-3 gap-6">
-    <div class="lg:col-span-2">
-      <h2 class="text-xl font-bold mb-3">Menu</h2>
-      <div id="order-menu" class="grid sm:grid-cols-2 gap-4"></div>
+  <!-- Hero -->
+  <section class="bg-red-600 text-white py-20 text-center">
+    <h2 class="text-4xl font-extrabold">📦 Review & Place Your Order</h2>
+    <p class="mt-2 text-lg">Almost there! Confirm your items and checkout.</p>
+  </section>
+
+  <!-- Order Review Section -->
+  <main class="max-w-5xl mx-auto px-6 py-12">
+    <h3 class="text-2xl font-bold mb-6">🛒 Your Cart</h3>
+
+    <div id="cartContainer" class="bg-white shadow rounded-lg p-6 mb-8">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="border-b">
+            <th class="py-2">Item</th>
+            <th class="py-2">Price</th>
+            <th class="py-2">Qty</th>
+            <th class="py-2 text-right">Total</th>
+          </tr>
+        </thead>
+        <tbody id="cartTable"></tbody>
+      </table>
+      <div class="flex justify-end text-xl font-bold mt-4">
+        Total: Rs. <span id="cartTotal">0</span>
+      </div>
     </div>
 
-    <aside class="bg-white p-4 rounded shadow">
-      <h3 class="font-bold">Cart</h3>
-      <div id="cart-list" class="mt-3 space-y-2"></div>
-      <div class="mt-3 font-semibold">Total: Rs <span id="cart-total">0</span></div>
+    <!-- Checkout Form -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h3 class="text-2xl font-bold mb-4">📍 Delivery Details</h3>
+      <form id="checkoutForm" class="space-y-4">
+        <input type="text" name="name" placeholder="Full Name" required class="w-full border p-2 rounded">
+        <input type="tel" name="phone" placeholder="Phone Number" required class="w-full border p-2 rounded">
+        <textarea name="address" rows="3" placeholder="Delivery Address" required class="w-full border p-2 rounded"></textarea>
 
-      <hr class="my-3">
-
-      <h3 class="font-bold">Your Details</h3>
-      <input id="o_name" placeholder="Name" class="w-full p-2 border rounded my-2">
-      <input id="o_phone" placeholder="Phone" class="w-full p-2 border rounded my-2">
-      <textarea id="o_address" placeholder="Address (for delivery)" class="w-full p-2 border rounded my-2"></textarea>
-      <label class="block mt-2">Order Type</label>
-      <select id="o_type" class="w-full p-2 border rounded">
-        <option value="Takeaway">Takeaway</option>
-        <option value="Delivery">Delivery</option>
-        <option value="Dine-In">Dine-In</option>
-      </select>
-
-      <button class="mt-4 bg-yellow-500 text-white w-full py-2 rounded" onclick="checkout()">Place Order</button>
-
-      <div id="order-confirm" class="mt-4 hidden">
-        <h4 class="font-bold">Order Confirmed</h4>
-        <p>Order ID: <span id="ord-id"></span></p>
-        <div id="ord-qr" class="my-3"></div>
-        <button class="px-3 py-1 border rounded" onclick="printOrderReceipt()">Print / Save PDF</button>
-      </div>
-    </aside>
+        <button type="submit" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">Place Order</button>
+      </form>
+      <p id="successMsg" class="hidden text-green-600 mt-4 text-center">✅ Order placed successfully! Thank you 🎉</p>
+    </div>
   </main>
 
-  <script src="script.js"></script>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-4 mt-12">
+    © 2025 Fast Bites — All Rights Reserved.
+  </footer>
+
   <script>
-    window.addEventListener('load', () => {
-      renderOrderMenu();
-      renderCartUI();
-    });
+    const cartTable = document.getElementById("cartTable");
+    const cartTotal = document.getElementById("cartTotal");
 
-    function addToCart(id){
-      addItemToCartById(id);
-      renderCartUI();
-    }
-    function addDealToCart(id){
-      addDealToCartById(id);
-      renderCartUI();
-    }
+    // 🛒 Load Cart
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let total = 0;
 
-    function checkout(){
-      const name = document.getElementById('o_name').value.trim();
-      const phone = document.getElementById('o_phone').value.trim();
-      const address = document.getElementById('o_address').value.trim();
-      const type = document.getElementById('o_type').value;
-      if(!name || !phone){ alert('Please enter name and phone'); return; }
-      const cart = getCart();
-      if(!cart.length){ alert('Cart is empty'); return; }
-
-      const total = cart.reduce((s,i)=>s + (i.price*i.qty), 0);
-      const order = {
-        id: generateOrderId(),
-        name, phone, address, type,
-        items: cart,
-        total,
-        status: 'Pending',
-        timestamp: new Date().toISOString()
-      };
-      saveOrder(order);
-      clearCart();
-      renderCartUI();
-
-      // show confirmation with QR
-      document.getElementById('order-confirm').classList.remove('hidden');
-      document.getElementById('ord-id').innerText = order.id;
-      const qrContainer = document.getElementById('ord-qr');
-      qrContainer.innerHTML = '';
-      const qr = new QRCode(qrContainer, {
-        text: JSON.stringify({orderId: order.id, name: order.name, total: order.total}),
-        width: 160, height: 160
+    if (cart.length === 0) {
+      cartTable.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-500">Your cart is empty 😔</td></tr>`;
+    } else {
+      cart.forEach((item, i) => {
+        const lineTotal = item.price * item.quantity;
+        total += lineTotal;
+        cartTable.innerHTML += `
+          <tr class="border-b">
+            <td class="py-2">${item.name}</td>
+            <td class="py-2">Rs. ${item.price}</td>
+            <td class="py-2">${item.quantity}</td>
+            <td class="py-2 text-right">Rs. ${lineTotal}</td>
+          </tr>
+        `;
       });
-      // store last printed order id to print later
-      localStorage.setItem('last_print_order', order.id);
-      alert('Order placed! Order ID: ' + order.id + '. You can print/download the receipt.');
+      cartTotal.innerText = total;
     }
 
-    function printOrderReceipt(){
-      const orderId = localStorage.getItem('last_print_order');
-      const orders = getOrders();
-      const order = orders.find(o => o.id === orderId);
-      if(!order){ alert('No recent order to print'); return; }
-      // build printable box
-      const el = document.createElement('div');
-      el.style.padding = '20px';
-      el.style.fontFamily = 'Arial, sans-serif';
-      el.innerHTML = `<h2>Mellow Cheez — Order Receipt</h2>
-                      <div>Order ID: ${order.id}</div>
-                      <div>Name: ${order.name}</div>
-                      <div>Phone: ${order.phone}</div>
-                      <div>Type: ${order.type}</div>
-                      <div>Address: ${order.address||'-'}</div>
-                      <hr>
-                      <div>${order.items.map(it=>`<div>${it.name} x ${it.qty} — Rs ${it.price*it.qty}</div>`).join('')}</div>
-                      <hr>
-                      <div><strong>Total: Rs ${order.total}</strong></div>`;
-      document.body.appendChild(el);
-      // convert to PDF or print using html2pdf
-      html2pdf().from(el).save(`Order_${order.id}.pdf`).then(()=> el.remove());
-    }
+    // ✅ Checkout Form
+    document.getElementById("checkoutForm").onsubmit = (e) => {
+      e.preventDefault();
 
+      const formData = new FormData(e.target);
+      const order = {
+        name: formData.get("name"),
+        phone: formData.get("phone"),
+        address: formData.get("address"),
+        cart,
+        total,
+        status: "Pending",
+        time: new Date().toISOString()
+      };
+
+      const orders = JSON.parse(localStorage.getItem("fb_orders")) || [];
+      orders.push(order);
+      localStorage.setItem("fb_orders", JSON.stringify(orders));
+
+      localStorage.removeItem("cart");
+      e.target.reset();
+      document.getElementById("successMsg").classList.remove("hidden");
+      cartTable.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-500">Your cart is empty 😎</td></tr>`;
+      cartTotal.innerText = 0;
+    };
   </script>
+
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Order — Fast Bites</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.5.2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow p-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">🍔 Fast Bites</h1>
+      <nav class="flex gap-4">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="menu.html" class="hover:underline">Menu</a>
+        <a href="deals.html" class="hover:underline">Deals</a>
+        <a href="gallery.html" class="hover:underline">Gallery</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-red-600 text-white py-20 text-center">
+    <h2 class="text-4xl font-extrabold">📦 Review & Place Your Order</h2>
+    <p class="mt-2 text-lg">Almost there! Confirm your items and checkout.</p>
+  </section>
+
+  <!-- Order Review Section -->
+  <main class="max-w-5xl mx-auto px-6 py-12">
+    <h3 class="text-2xl font-bold mb-6">🛒 Your Cart</h3>
+
+    <div id="cartContainer" class="bg-white shadow rounded-lg p-6 mb-8">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="border-b">
+            <th class="py-2">Item</th>
+            <th class="py-2">Price</th>
+            <th class="py-2">Qty</th>
+            <th class="py-2 text-right">Total</th>
+          </tr>
+        </thead>
+        <tbody id="cartTable"></tbody>
+      </table>
+      <div class="flex justify-end text-xl font-bold mt-4">
+        Total: Rs. <span id="cartTotal">0</span>
+      </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h3 class="text-2xl font-bold mb-4">📍 Delivery Details</h3>
+      <form id="checkoutForm" class="space-y-4">
+        <input type="text" name="name" placeholder="Full Name" required class="w-full border p-2 rounded">
+        <input type="tel" name="phone" placeholder="Phone Number" required class="w-full border p-2 rounded">
+        <textarea name="address" rows="3" placeholder="Delivery Address" required class="w-full border p-2 rounded"></textarea>
+
+        <button type="submit" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">Place Order</button>
+      </form>
+      <p id="successMsg" class="hidden text-green-600 mt-4 text-center">✅ Order placed successfully! Thank you 🎉</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-4 mt-12">
+    © 2025 Fast Bites — All Rights Reserved.
+  </footer>
+
+  <script>
+    const cartTable = document.getElementById("cartTable");
+    const cartTotal = document.getElementById("cartTotal");
+
+    // 🛒 Load Cart
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartTable.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-500">Your cart is empty 😔</td></tr>`;
+    } else {
+      cart.forEach((item, i) => {
+        const lineTotal = item.price * item.quantity;
+        total += lineTotal;
+        cartTable.innerHTML += `
+          <tr class="border-b">
+            <td class="py-2">${item.name}</td>
+            <td class="py-2">Rs. ${item.price}</td>
+            <td class="py-2">${item.quantity}</td>
+            <td class="py-2 text-right">Rs. ${lineTotal}</td>
+          </tr>
+        `;
+      });
+      cartTotal.innerText = total;
+    }
+
+    // ✅ Checkout Form
+    document.getElementById("checkoutForm").onsubmit = (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const order = {
+        name: formData.get("name"),
+        phone: formData.get("phone"),
+        address: formData.get("address"),
+        cart,
+        total,
+        status: "Pending",
+        time: new Date().toISOString()
+      };
+
+      const orders = JSON.parse(localStorage.getItem("fb_orders")) || [];
+      orders.push(order);
+      localStorage.setItem("fb_orders", JSON.stringify(orders));
+
+      localStorage.removeItem("cart");
+      e.target.reset();
+      document.getElementById("successMsg").classList.remove("hidden");
+      cartTable.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-500">Your cart is empty 😎</td></tr>`;
+      cartTotal.innerText = 0;
+    };
+  </script>
+
 </body>
 </html>
