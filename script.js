@@ -1,81 +1,56 @@
-const APPS_SCRIPT_URL = "GOOGLE_APPS_SCRIPT_URL"; // Replace with your Google Apps Script URL
+const API_URL = "YOUR_SCRIPT_URL";
 
-let menu = [];
-let cart = [];
-
-async function loadMenu(){
-  try {
-    const res = await fetch('menu.json');
-    menu = await res.json();
-    renderMenu();
-  } catch (e) {
-    document.getElementById('menu-items').innerText = "Failed to load menu.";
-  }
-}
-
-function renderMenu(){
-  const container = document.getElementById('menu-items');
-  container.innerHTML = '';
-  menu.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'menu-item';
-    div.innerHTML = `<div><strong>${item.name}</strong><div style="font-size:12px">${item.desc}</div></div>
-                     <div><div>Rs ${item.price}</div><button data-id="${item.id}">Add</button></div>`;
-    container.appendChild(div);
+// Load Menu
+async function loadMenu() {
+  const res = await fetch(API_URL);
+  const items = await res.json();
+  const menuDiv = document.getElementById("menu-list");
+  items.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `<div><b>${item.name}</b><br>${item.desc}</div><div>Rs ${item.price}</div>`;
+    menuDiv.appendChild(div);
   });
-  container.querySelectorAll('button').forEach(btn => btn.onclick = () => addToCart(parseInt(btn.dataset.id)));
 }
 
-function addToCart(id){
-  const item = menu.find(m=>m.id===id);
-  if(!item) return;
-  const existing = cart.find(c=>c.id===id);
-  if(existing) existing.qty++;
-  else cart.push({...item, qty:1});
-  renderCart();
-}
-
-function renderCart(){
-  const list = document.getElementById('cart-list');
-  list.innerHTML = '';
-  let total = 0;
-  cart.forEach(ci => {
-    total += ci.price * ci.qty;
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `<div>${ci.name} x ${ci.qty}</div><div>Rs ${ci.price * ci.qty}</div>`;
-    list.appendChild(div);
-  });
-  document.getElementById('totalAmount').innerText = total;
-}
-
-document.getElementById('orderForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const form = e.target;
-  const name = form.name.value.trim();
-  const phone = form.phone.value.trim();
-  const address = form.address.value.trim();
-  if(!name || !phone || !address || cart.length===0){ alert('Please complete form and add items'); return; }
-  const total = cart.reduce((s,i)=>s + i.price*i.qty, 0);
-  const payload = { name, phone, address, items: cart, total };
-  try {
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: {'Content-Type':'application/json'}
+// Order Page
+function initOrderPage() {
+  document.getElementById("orderForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const form = e.target;
+    const payload = {
+      type: "order",
+      name: form.name.value,
+      phone: form.phone.value,
+      address: form.address.value,
+      items: [], // (you can extend to add cart items)
+      total: document.getElementById("orderTotal").innerText
+    };
+    const res = await fetch(API_URL, {
+      method:"POST",
+      body: JSON.stringify(payload)
     });
     const data = await res.json();
-    if(data.status === 'success') {
-      document.getElementById('msg').innerText = "Order received! Thank you.";
-      cart = [];
-      renderCart();
-      form.reset();
-    } else {
-      document.getElementById('msg').innerText = "Error saving order: " + (data.message||'');
-    }
-  } catch (err) {
-    document.getElementById('msg').innerText = "Network error: " + err;
-  }
-});
+    document.getElementById("orderMsg").innerText = data.status==="success" ? "Order placed!" : "Error!";
+  });
+}
 
-loadMenu();
+// Contact Page
+function initContactPage() {
+  document.getElementById("contactForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const form = e.target;
+    const payload = {
+      type: "contact",
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value
+    };
+    const res = await fetch(API_URL, {
+      method:"POST",
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    document.getElementById("contactMsg").innerText = data.status==="success" ? "Message sent!" : "Error!";
+  });
+}
