@@ -1,3 +1,9 @@
+<script>
+  // ✅ Access check (redirect if not logged in)
+  if (localStorage.getItem("admin_access") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
 <!doctype html>
 <html lang="en">
 <head>
