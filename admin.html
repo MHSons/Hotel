@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Admin Panel</h1>
+
+  <section>
+    <h2>Add Menu Item</h2>
+    <input id="menuName" placeholder="Item Name">
+    <input id="menuPrice" placeholder="Price">
+    <button onclick="addMenu()">Add</button>
+  </section>
+
+  <section>
+    <h2>Add Deal</h2>
+    <input id="dealName" placeholder="Deal Name">
+    <input id="dealItems" placeholder="Items Included">
+    <input id="dealPrice" placeholder="Price">
+    <button onclick="addDeal()">Add</button>
+  </section>
+
+  <section>
+    <h2>Add Gallery Image</h2>
+    <input id="galleryUrl" placeholder="Image URL">
+    <button onclick="addGallery()">Add</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
