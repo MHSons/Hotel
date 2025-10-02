@@ -1,6 +1,0 @@
-[
-  {"id":1,"name":"Small Pizza","price":500,"desc":"Small size pizza"},
-  {"id":2,"name":"Grill Burger","price":400,"desc":"Juicy burger with fries"},
-  {"id":3,"name":"Loaded Fries","price":350,"desc":"Fries with cheese & toppings"},
-  {"id":4,"name":"Zinger Burger","price":550,"desc":"Spicy chicken zinger"}
-]
