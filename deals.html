@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deals — Mellow Cheez</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-50">
+  <header class="bg-yellow-500 text-white shadow">
+    <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Logo" class="h-10 w-10 object-contain" onerror="this.style.display='none'">
+        <h1 class="text-xl font-bold">Deals</h1>
+      </div>
+      <nav class="space-x-3">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="order.html">Order</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4">Special Deals</h2>
+    <div id="deals-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      const grid = document.getElementById('deals-grid');
+      const deals = getDeals();
+      if(!deals.length) {
+        grid.innerHTML = `<div class="p-6 bg-white rounded shadow">No deals yet. Go to Admin to add.</div>`;
+        return;
+      }
+      deals.forEach(d => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded shadow p-4';
+        card.innerHTML = `
+          <img src="${d.image||''}" onerror="this.style.display='none'" class="h-36 w-full object-cover rounded mb-3">
+          <h3 class="font-bold">${d.name}</h3>
+          <p class="text-sm text-gray-600">${d.desc||''}</p>
+          <div class="mt-3 flex justify-between items-center">
+            <div class="font-semibold">Rs ${d.price}</div>
+            <button onclick="addDealToCart(${d.id})" class="bg-yellow-500 text-white px-3 py-1 rounded">Add Deal</button>
+          </div>`;
+        grid.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>
