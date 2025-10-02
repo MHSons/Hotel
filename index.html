@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mellow Cheez — Home</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Utility libs (loaded on pages that need them too) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- NAV -->
+  <header class="bg-yellow-500 text-white shadow">
+    <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Logo" class="h-12 w-12 object-contain" onerror="this.style.display='none'">
+        <div>
+          <h1 class="text-2xl font-bold">Mellow Cheez</h1>
+          <p class="text-sm">Fresh • Fast • Delicious</p>
+        </div>
+      </div>
+
+      <nav class="space-x-4">
+        <a href="index.html" class="font-semibold hover:underline">Home</a>
+        <a href="menu.html" class="hover:underline">Menu</a>
+        <a href="deals.html" class="hover:underline">Deals</a>
+        <a href="order.html" class="hover:underline">Order</a>
+        <a href="gallery.html" class="hover:underline">Gallery</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
+        <a href="admin.html" class="text-sm bg-white text-yellow-600 px-3 py-1 rounded">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6">
+    <section class="bg-white rounded-lg shadow p-6 mb-6">
+      <div class="grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-3">Welcome to Mellow Cheez</h2>
+          <p class="mb-4">Delicious fast food, quick service and online ordering. Explore our menu, great deals and order online.</p>
+          <a href="menu.html" class="inline-block bg-yellow-500 text-white px-4 py-2 rounded shadow">View Menu</a>
+          <a href="order.html" class="inline-block ml-3 border border-yellow-500 text-yellow-600 px-4 py-2 rounded">Place Order</a>
+        </div>
+        <div>
+          <img src="assets/hero.jpg" alt="Food Hero" class="w-full rounded" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-6">
+      <h3 class="text-2xl font-semibold mb-3">Featured Deals</h3>
+      <div id="home-deals" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold mb-3">Popular Menu Items</h3>
+      <div id="home-menu" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-gray-200 p-6 mt-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex justify-between items-center">
+        <div>© <span id="year"></span> Mellow Cheez — All rights reserved</div>
+        <div class="text-sm">Made with ❤️</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+    // show a few items on home
+    window.addEventListener('load', () => {
+      const menu = getMenu().slice(0,6);
+      const deals = getDeals().slice(0,6);
+      const homeMenu = document.getElementById('home-menu');
+      const homeDeals = document.getElementById('home-deals');
+      menu.forEach(it => {
+        const el = document.createElement('div');
+        el.className = 'p-4 bg-white rounded shadow';
+        el.innerHTML = `<img src="${it.image||''}" onerror="this.style.display='none'" class="h-40 w-full object-cover rounded mb-3">
+                        <h4 class="font-bold">${it.name}</h4>
+                        <div class="text-sm text-gray-600">${it.category||''}</div>
+                        <div class="mt-2 font-semibold">Rs ${it.price}</div>`;
+        homeMenu.appendChild(el);
+      });
+      deals.forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'p-4 bg-white rounded shadow';
+        el.innerHTML = `<img src="${d.image||''}" onerror="this.style.display='none'" class="h-36 w-full object-cover rounded mb-3">
+                        <h4 class="font-bold">${d.name}</h4>
+                        <div class="text-sm text-gray-600">${d.desc||''}</div>
+                        <div class="mt-2 font-semibold">Rs ${d.price}</div>`;
+        homeDeals.appendChild(el);
+      });
+    });
+  </script>
+</body>
+</html>
