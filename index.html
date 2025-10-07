@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mellow Cheez Fast Food - Enjoy the best cheesy delights with online ordering and reservations.">
+    <meta name="description" content="Mellow Cheez Fast Food - Enjoy cheesy delights with online ordering, deals, and reservations.">
     <title>Mellow Cheez Fast Food</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-gradient-to-b from-gray-100 to-white font-sans">
     <!-- Navigation -->
-    <nav class="bg-green-700 text-white p-4 sticky top-0 z-50 shadow-lg">
+    <nav class="bg-gradient-to-r from-green-700 to-green-500 text-white p-6 sticky top-0 z-50 shadow-xl">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <img src="mellow-cheez-logo.png" alt="Mellow Cheez Logo" class="h-14 mr-4">
-                <span class="text-3xl font-bold">Mellow Cheez</span>
+                <img src="mellow-cheez-logo.png" alt="Mellow Cheez Logo" class="h-16 mr-6">
+                <span class="text-3xl font-extrabold">Mellow Cheez</span>
             </div>
-            <ul class="flex space-x-6">
-                <li><a href="#home" class="hover:text-yellow-300 transition">Home</a></li>
-                <li><a href="#menu" class="hover:text-yellow-300 transition">Menu</a></li>
-                <li><a href="#gallery" class="hover:text-yellow-300 transition">Gallery</a></li>
-                <li><a href="#reservations" class="hover:text-yellow-300 transition">Reservations</a></li>
-                <li><a href="#testimonials" class="hover:text-yellow-300 transition">Testimonials</a></li>
-                <li><a href="#contact" class="hover:text-yellow-300 transition">Contact</a></li>
+            <ul class="flex space-x-8">
+                <li><a href="#home" class="hover:text-yellow-300 transition-all duration-300">Home</a></li>
+                <li><a href="#menu" class="hover:text-yellow-300 transition-all duration-300">Menu</a></li>
+                <li><a href="#deals" class="hover:text-yellow-300 transition-all duration-300">Deals</a></li>
+                <li><a href="#gallery" class="hover:text-yellow-300 transition-all duration-300">Gallery</a></li>
+                <li><a href="#reservations" class="hover:text-yellow-300 transition-all duration-300">Reservations</a></li>
+                <li><a href="#testimonials" class="hover:text-yellow-300 transition-all duration-300">Testimonials</a></li>
+                <li><a href="#contact" class="hover:text-yellow-300 transition-all duration-300">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="bg-cover bg-center h-screen" style="background-image: url('https://source.unsplash.com/random/1600x900/?fastfood')">
-        <div class="container mx-auto h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
-            <div class="animate-fadeIn">
-                <h1 class="text-6xl font-bold mb-4">Welcome to Mellow Cheez</h1>
-                <p class="text-2xl mb-6">Savor the creamiest fast food experience with us!</p>
-                <a href="#menu" class="bg-yellow-400 text-black px-8 py-4 rounded-lg font-semibold hover:bg-yellow-500 transition">Order Now</a>
+    <section id="home" class="bg-cover bg-center h-screen relative" style="background-image: url('https://source.unsplash.com/random/1600x900/?fastfood')">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="text-center text-white animate__animated animate__fadeIn">
+                <h1 class="text-6xl font-extrabold mb-6">Welcome to Mellow Cheez</h1>
+                <p class="text-2xl mb-8">Indulge in the creamiest fast food experience!</p>
+                <a href="#menu" class="bg-yellow-400 text-black px-8 py-4 rounded-full font-bold hover:bg-yellow-500 transition-all duration-300">Explore Menu</a>
             </div>
         </div>
     </section>
@@ -42,114 +43,144 @@
     <!-- Menu Section -->
     <section id="menu" class="py-20 bg-white">
         <div class="container mx-auto text-center">
-            <h2 class="text-5xl font-bold mb-10 text-green-700">Our Menu</h2>
+            <h2 class="text-5xl font-extrabold mb-12 text-green-700">Our Menu</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="bg-gray-100 p-6 rounded-lg shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2">
-                    <img src="https://source.unsplash.com/random/300x200/?cheeseburger" alt="Cheeseburger" class="w-full h-48 object-cover rounded-lg mb-4">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-4">
+                    <img src="https://source.unsplash.com/random/300x200/?cheeseburger" alt="Cheeseburger" class="w-full h-56 object-cover rounded-lg mb-4">
                     <h3 class="text-2xl font-semibold text-green-600">Cheesy Burger</h3>
-                    <p class="text-gray-700 mt-2">$6.99</p>
-                    <button class="mt-4 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">Add to Cart</button>
+                    <p class="text-gray-700 mt-2">Juicy beef patty with melted cheese.</p>
+                    <p class="text-xl font-medium mt-2 text-yellow-600">$6.99</p>
+                    <button class="mt-4 bg-yellow-400 text-black px-5 py-2 rounded-full hover:bg-yellow-500 transition-all duration-300">Add to Cart</button>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-lg shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2">
-                    <img src="https://source.unsplash.com/random/300x200/?cheesepizza" alt="Cheese Pizza" class="w-full h-48 object-cover rounded-lg mb-4">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-4">
+                    <img src="https://source.unsplash.com/random/300x200/?cheesepizza" alt="Cheese Pizza" class="w-full h-56 object-cover rounded-lg mb-4">
                     <h3 class="text-2xl font-semibold text-green-600">Cheesy Pizza</h3>
-                    <p class="text-gray-700 mt-2">$9.99</p>
-                    <button class="mt-4 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">Add to Cart</button>
+                    <p class="text-gray-700 mt-2">Fresh dough with gooey cheese topping.</p>
+                    <p class="text-xl font-medium mt-2 text-yellow-600">$9.99</p>
+                    <button class="mt-4 bg-yellow-400 text-black px-5 py-2 rounded-full hover:bg-yellow-500 transition-all duration-300">Add to Cart</button>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-lg shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2">
-                    <img src="https://source.unsplash.com/random/300x200/?cheesefries" alt="Cheese Fries" class="w-full h-48 object-cover rounded-lg mb-4">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-4">
+                    <img src="https://source.unsplash.com/random/300x200/?cheesefries" alt="Cheese Fries" class="w-full h-56 object-cover rounded-lg mb-4">
                     <h3 class="text-2xl font-semibold text-green-600">Cheesy Fries</h3>
-                    <p class="text-gray-700 mt-2">$3.99</p>
-                    <button class="mt-4 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition">Add to Cart</button>
+                    <p class="text-gray-700 mt-2">Crispy fries loaded with cheese.</p>
+                    <p class="text-xl font-medium mt-2 text-yellow-600">$3.99</p>
+                    <button class="mt-4 bg-yellow-400 text-black px-5 py-2 rounded-full hover:bg-yellow-500 transition-all duration-300">Add to Cart</button>
                 </div>
             </div>
-            <a href="#order" class="mt-10 inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">View Full Menu & Order</a>
+            <a href="#order" class="mt-12 inline-block bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 transition-all duration-300">View Full Menu</a>
+        </div>
+    </section>
+
+    <!-- Deals Section -->
+    <section id="deals" class="py-20 bg-gray-100">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-extrabold mb-12 text-green-700">Special Deals</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-white p-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300">
+                    <h3 class="text-2xl font-semibold text-green-600">Family Combo</h3>
+                    <p class="text-gray-700 mt-2">2 Burgers, 1 Pizza, Fries & Drinks</p>
+                    <p class="text-xl font-medium mt-2 text-yellow-600">$19.99</p>
+                    <button class="mt-4 bg-yellow-400 text-black px-5 py-2 rounded-full hover:bg-yellow-500 transition-all duration-300">Order Now</button>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300">
+                    <h3 class="text-2xl font-semibold text-green-600">Lunch Special</h3>
+                    <p class="text-gray-700 mt-2">Burger & Fries Combo</p>
+                    <p class="text-xl font-medium mt-2 text-yellow-600">$8.99</p>
+                    <button class="mt-4 bg-yellow-400 text-black px-5 py-2 rounded-full hover:bg-yellow-500 transition-all duration-300">Order Now</button>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-gray-100">
+    <section id="gallery" class="py-20 bg-white">
         <div class="container mx-auto text-center">
-            <h2 class="text-5xl font-bold mb-10 text-green-700">Gallery</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <img src="https://source.unsplash.com/random/400x300/?burger" alt="Burger" class="rounded-lg shadow-lg hover:shadow-xl transition">
-                <img src="https://source.unsplash.com/random/400x300/?pizza" alt="Pizza" class="rounded-lg shadow-lg hover:shadow-xl transition">
-                <img src="https://source.unsplash.com/random/400x300/?fries" alt="Fries" class="rounded-lg shadow-lg hover:shadow-xl transition">
+            <h2 class="text-5xl font-extrabold mb-12 text-green-700">Gallery</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <img src="https://source.unsplash.com/random/400x300/?burger" alt="Burger" class="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                <img src="https://source.unsplash.com/random/400x300/?pizza" alt="Pizza" class="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                <img src="https://source.unsplash.com/random/400x300/?fries" alt="Fries" class="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                <img src="https://source.unsplash.com/random/400x300/?fastfood" alt="Fast Food" class="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
             </div>
         </div>
     </section>
 
     <!-- Reservations Section -->
-    <section id="reservations" class="py-20 bg-white">
+    <section id="reservations" class="py-20 bg-gray-100">
         <div class="container mx-auto text-center">
-            <h2 class="text-5xl font-bold mb-10 text-green-700">Make a Reservation</h2>
-            <form class="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-lg">
-                <div class="mb-4">
-                    <input type="text" id="res-name" placeholder="Your Name" class="w-full p-3 border rounded">
+            <h2 class="text-5xl font-extrabold mb-12 text-green-700">Make a Reservation</h2>
+            <form class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-2xl">
+                <div class="mb-6">
+                    <input type="text" id="res-name" placeholder="Your Name" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
-                <div class="mb-4">
-                    <input type="date" id="res-date" class="w-full p-3 border rounded">
+                <div class="mb-6">
+                    <input type="date" id="res-date" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
-                <div class="mb-4">
-                    <input type="time" id="res-time" class="w-full p-3 border rounded">
+                <div class="mb-6">
+                    <input type="time" id="res-time" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
-                <div class="mb-4">
-                    <input type="number" id="res-guests" placeholder="Number of Guests" class="w-full p-3 border rounded" min="1">
+                <div class="mb-6">
+                    <input type="number" id="res-guests" placeholder="Number of Guests" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" min="1">
                 </div>
-                <button id="submitReservation" class="bg-yellow-400 text-black px-6 py-3 rounded-lg hover:bg-yellow-500 transition">Book Now</button>
+                <button id="submitReservation" class="bg-yellow-400 text-black px-6 py-3 rounded-full hover:bg-yellow-500 transition-all duration-300">Book Now</button>
             </form>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-gray-200">
+    <section id="testimonials" class="py-20 bg-white">
         <div class="container mx-auto text-center">
-            <h2 class="text-5xl font-bold mb-10 text-green-700">What Our Customers Say</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <p class="text-gray-700 italic">"Best cheeseburger I've ever had! Highly recommend!"</p>
-                    <p class="mt-4 font-semibold text-green-600">- Ahmed Khan</p>
+            <h2 class="text-5xl font-extrabold mb-12 text-green-700">What Our Customers Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <p class="text-gray-700 italic text-lg">"The cheeseburger was out of this world! Amazing taste!"</p>
+                    <p class="mt-4 font-semibold text-green-600">- Ali Hassan</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <p class="text-gray-700 italic">"Amazing service and delicious food. Will visit again!"</p>
-                    <p class="mt-4 font-semibold text-green-600">- Sara Ali</p>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <p class="text-gray-700 italic text-lg">"Fantastic service and the pizza was delicious!"</p>
+                    <p class="mt-4 font-semibold text-green-600">- Fatima Zahra</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
+    <section id="contact" class="py-20 bg-gray-100">
         <div class="container mx-auto text-center">
-            <h2 class="text-5xl font-bold mb-10 text-green-700">Contact Us</h2>
-            <div class="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-lg">
-                <div class="mb-4">
-                    <input type="text" id="contact-name" placeholder="Your Name" class="w-full p-3 border rounded">
+            <h2 class="text-5xl font-extrabold mb-12 text-green-700">Contact Us</h2>
+            <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-2xl">
+                <div class="mb-6">
+                    <input type="text" id="contact-name" placeholder="Your Name" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
-                <div class="mb-4">
-                    <input type="email" id="contact-email" placeholder="Your Email" class="w-full p-3 border rounded">
+                <div class="mb-6">
+                    <input type="email" id="contact-email" placeholder="Your Email" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
-                <div class="mb-4">
-                    <textarea id="contact-message" placeholder="Your Message" class="w-full p-3 border rounded h-32"></textarea>
+                <div class="mb-6">
+                    <textarea id="contact-message" placeholder="Your Message" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 h-32"></textarea>
                 </div>
-                <button id="submitContact" class="bg-yellow-400 text-black px-6 py-3 rounded-lg hover:bg-yellow-500 transition">Send Message</button>
+                <button id="submitContact" class="bg-yellow-400 text-black px-6 py-3 rounded-full hover:bg-yellow-500 transition-all duration-300">Send Message</button>
             </div>
-            <div class="mt-6">
-                <a href="#" class="text-2xl text-gray-700 hover:text-green-600 transition"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="ml-4 text-2xl text-gray-700 hover:text-green-600 transition"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="ml-4 text-2xl text-gray-700 hover:text-green-600 transition"><i class="fab fa-instagram"></i></a>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="#" class="text-3xl text-gray-700 hover:text-green-600 transition-all duration-300"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-3xl text-gray-700 hover:text-green-600 transition-all duration-300"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-3xl text-gray-700 hover:text-green-600 transition-all duration-300"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-green-700 text-white py-6">
+    <footer class="bg-gradient-to-r from-green-700 to-green-500 text-white py-8">
         <div class="container mx-auto text-center">
             <p>&copy; 2025 Mellow Cheez Fast Food. All rights reserved.</p>
-            <p class="mt-2">Contact: info@mellowcheez.com | Phone: +92-123-4567890</p>
+            <p class="mt-2">Contact: info@mellowcheez.com | Phone: +92-123-4567890 | Address: 123 Cheesy Lane, Karachi</p>
+            <div class="mt-4">
+                <a href="#" class="text-xl mx-2 hover:text-yellow-300 transition-all duration-300">Privacy Policy</a>
+                <a href="#" class="text-xl mx-2 hover:text-yellow-300 transition-all duration-300">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
     <script src="script.js"></script>
 </body>
 </html>
