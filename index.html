@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MELLOW CHEEZ - Fast Food Restaurant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 🌟 Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.png" alt="Mellow Cheez Logo" />
+      <h1>MELLOW CHEEZ</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#deals">Deals</a></li>
+        <li><a href="#booking">Book Table</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 🏠 Hero Section -->
+  <section id="home" class="hero">
+    <h2>Welcome to <span>MELLOW CHEEZ</span></h2>
+    <p>Delicious food, fast delivery, and great deals — all in one place!</p>
+    <a href="#menu" class="btn">Order Now</a>
+  </section>
+
+  <!-- 🍔 Menu Section -->
+  <section id="menu" class="menu-section">
+    <h2>Our Menu</h2>
+    <div id="menu-container" class="menu-grid">
+      <!-- Items dynamically loaded from script.js -->
+    </div>
+  </section>
+
+  <!-- 📣 Daily Deals -->
+  <section id="deals" class="deals-section">
+    <h2>Special Offers & Deals</h2>
+    <div id="deals-container" class="deals-grid"></div>
+  </section>
+
+  <!-- 🪑 Table Booking -->
+  <section id="booking" class="booking-section">
+    <h2>Book a Table</h2>
+    <form id="bookingForm">
+      <input type="text" placeholder="Your Name" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <input type="date" required />
+      <input type="time" required />
+      <input type="number" placeholder="No. of People" required />
+      <button type="submit" class="btn">Reserve</button>
+    </form>
+  </section>
+
+  <!-- ⭐ Customer Reviews -->
+  <section id="reviews" class="reviews-section">
+    <h2>Customer Reviews</h2>
+    <div id="reviews-container" class="review-grid"></div>
+    <form id="reviewForm">
+      <textarea placeholder="Write your feedback..." required></textarea>
+      <button type="submit" class="btn">Submit Review</button>
+    </form>
+  </section>
+
+  <!-- 📍 Contact -->
+  <section id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+    <p><strong>Location:</strong> Lahore, Pakistan</p>
+    <p><strong>Phone:</strong> 03358067880</p>
+    <p><strong>Email:</strong> info@mellowcheez.com</p>
+  </section>
+
+  <!-- 📜 Footer -->
+  <footer>
+    <p>&copy; 2025 MELLOW CHEEZ. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
