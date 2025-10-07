@@ -27,6 +27,10 @@
                 <li><a href="#testimonials" class="text-lg hover:text-yellow-300 transition-all duration-300">Testimonials</a></li>
                 <li><a href="#contact" class="text-lg hover:text-yellow-300 transition-all duration-300">Contact</a></li>
                 <li><a href="#admin-login" class="text-lg hover:text-yellow-300 transition-all duration-300">Admin</a></li>
+                <li id="cart-icon" class="relative text-lg hover:text-yellow-300 transition-all duration-300">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </li>
             </ul>
         </div>
     </nav>
@@ -52,21 +56,21 @@
                     <h3 class="text-3xl font-semibold text-green-700">Cheesy Burger</h3>
                     <p class="text-gray-600 mt-4">Fresh beef patty with melted cheddar and special sauce.</p>
                     <p class="text-2xl font-medium mt-4 text-yellow-600">$6.99</p>
-                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300">Add to Cart</button>
+                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300 add-to-cart" data-name="Cheesy Burger" data-price="6.99">Add to Cart</button>
                 </div>
                 <div class="bg-gray-100 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-400 transform hover:-translate-y-6">
                     <img src="https://source.unsplash.com/random/400x300/?cheesepizza" alt="Cheesy Pizza" class="w-full h-64 object-cover rounded-xl mb-6">
                     <h3 class="text-3xl font-semibold text-green-700">Cheesy Pizza</h3>
                     <p class="text-gray-600 mt-4">Hand-tossed crust with mozzarella and fresh toppings.</p>
                     <p class="text-2xl font-medium mt-4 text-yellow-600">$9.99</p>
-                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300">Add to Cart</button>
+                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300 add-to-cart" data-name="Cheesy Pizza" data-price="9.99">Add to Cart</button>
                 </div>
                 <div class="bg-gray-100 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-400 transform hover:-translate-y-6">
                     <img src="https://source.unsplash.com/random/400x300/?cheesefries" alt="Cheesy Fries" class="w-full h-64 object-cover rounded-xl mb-6">
                     <h3 class="text-3xl font-semibold text-green-700">Cheesy Fries</h3>
                     <p class="text-gray-600 mt-4">Crispy fries topped with melted cheese blend.</p>
                     <p class="text-2xl font-medium mt-4 text-yellow-600">$3.99</p>
-                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300">Add to Cart</button>
+                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300 add-to-cart" data-name="Cheesy Fries" data-price="3.99">Add to Cart</button>
                 </div>
             </div>
             <a href="#order" class="mt-16 inline-block bg-green-700 text-white px-10 py-4 rounded-full text-xl hover:bg-green-800 transition-all duration-300">View Full Menu</a>
@@ -82,17 +86,28 @@
                     <h3 class="text-3xl font-semibold text-green-700">Family Feast</h3>
                     <p class="text-gray-600 mt-4">2 Burgers, 1 Large Pizza, Fries & 4 Drinks</p>
                     <p class="text-2xl font-medium mt-4 text-yellow-600">$19.99</p>
-                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300">Grab Deal</button>
+                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300 add-to-cart" data-name="Family Feast" data-price="19.99">Add to Cart</button>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-400">
                     <h3 class="text-3xl font-semibold text-green-700">Lunch Special</h3>
                     <p class="text-gray-600 mt-4">Burger & Fries Combo</p>
                     <p class="text-2xl font-medium mt-4 text-yellow-600">$8.99</p>
-                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300">Grab Deal</button>
+                    <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300 add-to-cart" data-name="Lunch Special" data-price="8.99">Add to Cart</button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 h-3/4 overflow-y-auto">
+            <h3 class="text-2xl font-bold text-green-800 mb-6">Your Cart</h3>
+            <ul id="cart-items"></ul>
+            <p id="cart-total" class="mt-4 text-xl font-semibold text-green-700">Total: $0.00</p>
+            <button id="checkout-btn" class="mt-6 w-full bg-green-700 text-white px-6 py-3 rounded-full hover:bg-green-800 transition-all duration-300">Checkout</button>
+            <button id="close-cart-btn" class="mt-4 text-gray-600 hover:text-red-600">Close</button>
+        </div>
+    </div>
 
     <!-- Gallery Section -->
     <section id="gallery" class="py-24 bg-white">
@@ -170,7 +185,7 @@
         </div>
     </section>
 
-    <!-- Admin Login Modal (Triggered by #admin-login link) -->
+    <!-- Admin Login Modal -->
     <div id="admin-login-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white p-8 rounded-2xl shadow-2xl w-96">
             <h3 class="text-2xl font-bold text-green-800 mb-6">Admin Login</h3>
@@ -181,7 +196,7 @@
         </div>
     </div>
 
-    <!-- Admin Panel (Hidden until logged in) -->
+    <!-- Admin Panel -->
     <div id="admin-panel" class="hidden fixed inset-0 bg-gray-100 z-50 p-10">
         <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto">
             <h3 class="text-3xl font-bold text-green-800 mb-6">Admin Panel</h3>
