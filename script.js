@@ -1,0 +1,1 @@
+function updateCartBadge(){ const cart = JSON.parse(localStorage.getItem('mc_cart')||'[]'); const badge=document.getElementById('cartCount'); if(badge) badge.innerText = cart.reduce((s,i)=>s+i.qty,0); }document.addEventListener('DOMContentLoaded', updateCartBadge);

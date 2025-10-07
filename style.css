@@ -1,0 +1,24 @@
+
+/* Mellow Cheez theme: Yellow, Brown & Green; modern + fun */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+:root{--mc-yellow:#f6c23e;--mc-brown:#6b3e26;--mc-green:#4caf50;--mc-bg:#fff9ec;--mc-muted:#6b6b6b}
+body{background:var(--mc-bg);color:var(--mc-brown);line-height:1.6}
+header{background:#fff;padding:14px 0;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:1000}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:56px;width:56px;object-fit:contain;border-radius:8px}
+.brand h1{font-size:1.4rem;color:var(--mc-brown)}
+nav a{color:var(--mc-brown);text-decoration:none;margin-left:14px;font-weight:600}
+nav a.active, nav a:hover{color:var(--mc-yellow)}
+.hero{max-width:1100px;margin:18px auto;padding:28px 16px;background:linear-gradient(90deg, rgba(246,194,62,0.08), rgba(76,175,80,0.04));border-radius:12px;display:flex;gap:20px;align-items:center}
+.hero .left{flex:1}
+.hero h2{font-size:2rem;color:var(--mc-brown);margin-bottom:8px}
+.hero p{color:var(--mc-muted)}
+.btn{background:var(--mc-brown);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;display:inline-block}
+.btn.alt{background:var(--mc-yellow);color:var(--mc-brown)}
+.container{max-width:1100px;margin:20px auto;padding:0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);overflow:hidden}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+footer{background:var(--mc-brown);color:#fff;padding:18px;text-align:center;margin-top:28px;border-radius:8px}
+@media(max-width:640px){.hero{flex-direction:column;text-align:center}.brand h1{font-size:1.1rem}}
