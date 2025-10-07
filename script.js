@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = this.getAttribute('href').substring(1);
             if (targetId === 'admin-login') {
                 document.getElementById('admin-login-modal').classList.remove('hidden');
+            } else if (targetId === 'cart-icon') {
+                document.getElementById('cart-modal').classList.remove('hidden');
+                displayCart();
             } else {
                 const targetElement = document.getElementById(targetId);
                 window.scrollTo({
@@ -14,6 +17,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+    });
+
+    // Cart System
+    let cart = [];
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+            const name = button.getAttribute('data-name');
+            const price = parseFloat(button.getAttribute('data-price'));
+            cart.push({ name, price });
+            updateCartCount();
+        });
+    });
+
+    function updateCartCount() {
+        const cartCount = document.getElementById('cart-count');
+        cartCount.textContent = cart.length;
+    }
+
+    function displayCart() {
+        const cartItems = document.getElementById('cart-items');
+        cartItems.innerHTML = '';
+        let total = 0;
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+            cartItems.appendChild(li);
+            total += item.price;
+        });
+        document.getElementById('cart-total').textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+        if (cart.length > 0) {
+            alert('Thank you for your order! Total: $' + cart.reduce((sum, item) => sum + item.price, 0).toFixed(2) + '. Please visit or call to complete your purchase.');
+            cart = [];
+            updateCartCount();
+            document.getElementById('cart-modal').classList.add('hidden');
+            document.getElementById('cart-items').innerHTML = '';
+            document.getElementById('cart-total').textContent = 'Total: $0.00';
+        } else {
+            alert('Your cart is empty.');
+        }
+    });
+
+    document.getElementById('close-cart-btn').addEventListener('click', () => {
+        document.getElementById('cart-modal').classList.add('hidden');
     });
 
     // Admin Login
@@ -54,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = document.getElementById('contact-message').value;
         
         if (name && email && message) {
-            alert('Thank you for your message! We will get back to you soon at ' + email + '.');
+            alert('Thank you for your message! We will get back to you soon at ' + email + ' (as of 12:51 PM PKT, October 07, 2025).');
             document.getElementById('contact-name').value = '';
             document.getElementById('contact-email').value = '';
             document.getElementById('contact-message').value = '';
@@ -72,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const guests = document.getElementById('res-guests').value;
         
         if (name && date && time && guests) {
-            alert('Reservation confirmed for ' + name + ' on ' + date + ' at ' + time + ' for ' + guests + ' guests. We will contact you soon!');
+            alert('Reservation confirmed for ' + name + ' on ' + date + ' at ' + time + ' for ' + guests + ' guests. We will contact you soon (as of 12:51 PM PKT, October 07, 2025).');
             document.getElementById('res-name').value = '';
             document.getElementById('res-date').value = '';
             document.getElementById('res-time').value = '';
@@ -85,53 +134,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Admin Panel - Add Menu Item
     document.getElementById('add-menu-item').addEventListener('click', () => {
         const name = document.getElementById('menu-item-name').value;
-        const desc = document.getElementById('menu-item-desc').value;
-        const price = document.getElementById('menu-item-price').value;
-        const image = document.getElementById('menu-item-image').value;
-
-        if (name && desc && price && image) {
-            const menuItems = document.getElementById('menu-items');
-            const newItem = document.createElement('div');
-            newItem.className = 'bg-gray-100 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-400 transform hover:-translate-y-6';
-            newItem.innerHTML = `
-                <img src="${image}" alt="${name}" class="w-full h-64 object-cover rounded-xl mb-6">
-                <h3 class="text-3xl font-semibold text-green-700">${name}</h3>
-                <p class="text-gray-600 mt-4">${desc}</p>
-                <p class="text-2xl font-medium mt-4 text-yellow-600">${price}</p>
-                <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300">Add to Cart</button>
-            `;
-            menuItems.appendChild(newItem);
-            document.getElementById('menu-item-name').value = '';
-            document.getElementById('menu-item-desc').value = '';
-            document.getElementById('menu-item-price').value = '';
-            document.getElementById('menu-item-image').value = '';
-        } else {
-            alert('Please fill out all fields.');
-        }
-    });
-
-    // Admin Panel - Add Deal
-    document.getElementById('add-deal').addEventListener('click', () => {
-        const name = document.getElementById('deal-name').value;
-        const desc = document.getElementById('deal-desc').value;
-        const price = document.getElementById('deal-price').value;
-
-        if (name && desc && price) {
-            const dealItems = document.getElementById('deal-items');
-            const newDeal = document.createElement('div');
-            newDeal.className = 'bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-400';
-            newDeal.innerHTML = `
-                <h3 class="text-3xl font-semibold text-green-700">${name}</h3>
-                <p class="text-gray-600 mt-4">${desc}</p>
-                <p class="text-2xl font-medium mt-4 text-yellow-600">${price}</p>
-                <button class="mt-6 bg-yellow-500 text-black px-6 py-3 rounded-full hover:bg-yellow-600 transition-all duration-300">Grab Deal</button>
-            `;
-            dealItems.appendChild(newDeal);
-            document.getElementById('deal-name').value = '';
-            document.getElementById('deal-desc').value = '';
-            document.getElementById('deal-price').value = '';
-        } else {
-            alert('Please fill out all fields.');
-        }
-    });
-});
+        const desc = document.getElementBy
