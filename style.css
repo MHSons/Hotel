@@ -44,10 +44,18 @@ input:focus, textarea:focus {
     box-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
 }
 
-#admin-login-modal, #admin-panel {
+#admin-login-modal, #admin-panel, #cart-modal {
     display: none;
 }
 
 #admin-panel {
     overflow-y: auto;
+}
+
+#cart-modal {
+    overflow-y: auto;
+}
+
+#cart-icon {
+    cursor: pointer;
 }
