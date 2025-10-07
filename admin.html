@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - Mellow Cheez</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="logo.png" alt="logo" height="40"> Admin Panel</a>
+    <div class="ms-auto">
+      <a href="index.html" class="btn btn-light">View Site</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container my-4">
+  <div id="adminLoginWrap">
+    <h3>Admin Login</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <input id="adminUser" class="form-control mb-2" placeholder="username">
+        <input id="adminPass" type="password" class="form-control mb-2" placeholder="password">
+        <button id="adminLoginBtn" class="btn btn-primary">Login</button>
+        <small class="d-block mt-2 text-muted">Default admin: admin / admin123 (change after login)</small>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminPanel" class="d-none">
+    <h3>Restaurant Settings</h3>
+    <div class="row gy-2">
+      <div class="col-md-4">
+        <input id="settingName" class="form-control" placeholder="Restaurant name">
+      </div>
+      <div class="col-md-8">
+        <input id="settingDesc" class="form-control" placeholder="Short description">
+      </div>
+      <div class="col-12">
+        <label>Hero image</label>
+        <input id="heroUpload" type="file" accept="image/*" class="form-control">
+      </div>
+      <div class="col-12">
+        <button id="saveSettings" class="btn btn-success">Save Settings</button>
+      </div>
+    </div>
+
+    <hr>
+    <h3>Menu Management</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <input id="newName" class="form-control mb-2" placeholder="Item name">
+        <input id="newCategory" class="form-control mb-2" placeholder="Category (Burger, Fries...)">
+        <input id="newPrice" type="number" class="form-control mb-2" placeholder="Price">
+        <textarea id="newDesc" class="form-control mb-2" placeholder="Description"></textarea>
+        <input id="newImage" type="file" accept="image/*" class="form-control mb-2">
+        <button id="addItemBtn" class="btn btn-primary">Add Menu Item</button>
+      </div>
+      <div class="col-md-8">
+        <div id="adminMenuList" class="list-group"></div>
+      </div>
+    </div>
+
+    <hr>
+    <h3>Deals Management</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <input id="dealTitle" class="form-control mb-2" placeholder="Deal title">
+        <input id="dealPrice" type="number" class="form-control mb-2" placeholder="Deal price">
+        <textarea id="dealItems" class="form-control mb-2" placeholder="Comma-separated item ids or names"></textarea>
+        <button id="addDealBtn" class="btn btn-warning">Add Deal</button>
+      </div>
+      <div class="col-md-8">
+        <div id="adminDealsList" class="list-group"></div>
+      </div>
+    </div>
+
+    <hr>
+    <h3>Orders</h3>
+    <div id="ordersList"></div>
+
+    <hr>
+    <button id="logoutBtn" class="btn btn-danger">Logout</button>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
