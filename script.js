@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = this.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
             window.scrollTo({
-                top: targetElement.offsetTop - 80,
+                top: targetElement.offsetTop - 100,
                 behavior: 'smooth'
             });
         });
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = document.getElementById('contact-message').value;
         
         if (name && email && message) {
-            alert('Thank you for your message! We will get back to you soon.');
+            alert('Thank you for your message! We will get back to you soon at ' + email + '.');
             document.getElementById('contact-name').value = '';
             document.getElementById('contact-email').value = '';
             document.getElementById('contact-message').value = '';
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const guests = document.getElementById('res-guests').value;
         
         if (name && date && time && guests) {
-            alert('Reservation confirmed! We will contact you to confirm details.');
+            alert('Reservation confirmed for ' + name + ' on ' + date + ' at ' + time + ' for ' + guests + ' guests. We will contact you soon!');
             document.getElementById('res-name').value = '';
             document.getElementById('res-date').value = '';
             document.getElementById('res-time').value = '';
