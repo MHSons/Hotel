@@ -1,88 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MELLOW CHEEZ - Fast Food Restaurant</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mellow Cheez Fast Food</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <!-- 🌟 Header -->
-  <header class="header">
-    <div class="logo">
-      <img src="logo.png" alt="Mellow Cheez Logo" />
-      <h1>MELLOW CHEEZ</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#deals">Deals</a></li>
-        <li><a href="#booking">Book Table</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="admin.html">Admin</a></li>
-      </ul>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-green-600 text-white p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="mellow-cheez-logo.png" alt="Mellow Cheez Logo" class="h-12 mr-4">
+                <span class="text-2xl font-bold">Mellow Cheez</span>
+            </div>
+            <ul class="flex space-x-6">
+                <li><a href="#home" class="hover:text-yellow-300">Home</a></li>
+                <li><a href="#menu" class="hover:text-yellow-300">Menu</a></li>
+                <li><a href="#about" class="hover:text-yellow-300">About</a></li>
+                <li><a href="#contact" class="hover:text-yellow-300">Contact</a></li>
+            </ul>
+        </div>
     </nav>
-  </header>
 
-  <!-- 🏠 Hero Section -->
-  <section id="home" class="hero">
-    <h2>Welcome to <span>MELLOW CHEEZ</span></h2>
-    <p>Delicious food, fast delivery, and great deals — all in one place!</p>
-    <a href="#menu" class="btn">Order Now</a>
-  </section>
+    <!-- Hero Section -->
+    <section id="home" class="bg-cover bg-center h-screen" style="background-image: url('https://source.unsplash.com/random/1600x900/?fastfood')">
+        <div class="container mx-auto h-full flex items-center justify-center text-center text-white">
+            <div>
+                <h1 class="text-5xl font-bold mb-4">Welcome to Mellow Cheez</h1>
+                <p class="text-xl mb-6">Enjoy the cheesy goodness of our fast food delights!</p>
+                <a href="#menu" class="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-500">Explore Menu</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- 🍔 Menu Section -->
-  <section id="menu" class="menu-section">
-    <h2>Our Menu</h2>
-    <div id="menu-container" class="menu-grid">
-      <!-- Items dynamically loaded from script.js -->
-    </div>
-  </section>
+    <!-- Menu Section -->
+    <section id="menu" class="py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8 text-green-600">Our Menu</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="https://source.unsplash.com/random/300x200/?cheeseburger" alt="Cheeseburger" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-2xl font-semibold">Cheesy Burger</h3>
+                    <p class="text-gray-600">$6.99</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="https://source.unsplash.com/random/300x200/?cheesepizza" alt="Cheese Pizza" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-2xl font-semibold">Cheesy Pizza</h3>
+                    <p class="text-gray-600">$9.99</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="https://source.unsplash.com/random/300x200/?cheesefries" alt="Cheese Fries" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-2xl font-semibold">Cheesy Fries</h3>
+                    <p class="text-gray-600">$3.99</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- 📣 Daily Deals -->
-  <section id="deals" class="deals-section">
-    <h2>Special Offers & Deals</h2>
-    <div id="deals-container" class="deals-grid"></div>
-  </section>
+    <!-- About Section -->
+    <section id="about" class="bg-gray-200 py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8 text-green-600">About Mellow Cheez</h2>
+            <p class="text-lg max-w-2xl mx-auto">Mellow Cheez brings you the creamiest, most delicious fast food with a focus on quality and taste. Visit us today!</p>
+        </div>
+    </section>
 
-  <!-- 🪑 Table Booking -->
-  <section id="booking" class="booking-section">
-    <h2>Book a Table</h2>
-    <form id="bookingForm">
-      <input type="text" placeholder="Your Name" required />
-      <input type="tel" placeholder="Phone Number" required />
-      <input type="date" required />
-      <input type="time" required />
-      <input type="number" placeholder="No. of People" required />
-      <button type="submit" class="btn">Reserve</button>
-    </form>
-  </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8 text-green-600">Contact Us</h2>
+            <div class="max-w-lg mx-auto">
+                <div class="mb-4">
+                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 border rounded">
+                </div>
+                <div class="mb-4">
+                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 border rounded">
+                </div>
+                <div class="mb-4">
+                    <textarea id="message" placeholder="Your Message" class="w-full p-3 border rounded h-32"></textarea>
+                </div>
+                <button id="submitContact" class="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-500">Send Message</button>
+            </div>
+        </div>
+    </section>
 
-  <!-- ⭐ Customer Reviews -->
-  <section id="reviews" class="reviews-section">
-    <h2>Customer Reviews</h2>
-    <div id="reviews-container" class="review-grid"></div>
-    <form id="reviewForm">
-      <textarea placeholder="Write your feedback..." required></textarea>
-      <button type="submit" class="btn">Submit Review</button>
-    </form>
-  </section>
+    <!-- Footer -->
+    <footer class="bg-green-600 text-white p-4 text-center">
+        <p>&copy; 2025 Mellow Cheez Fast Food. All rights reserved.</p>
+    </footer>
 
-  <!-- 📍 Contact -->
-  <section id="contact" class="contact-section">
-    <h2>Contact Us</h2>
-    <p><strong>Location:</strong> Lahore, Pakistan</p>
-    <p><strong>Phone:</strong> 03358067880</p>
-    <p><strong>Email:</strong> info@mellowcheez.com</p>
-  </section>
-
-  <!-- 📜 Footer -->
-  <footer>
-    <p>&copy; 2025 MELLOW CHEEZ. All rights reserved.</p>
-  </footer>
-
-  <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
