@@ -1,204 +1,51 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mellow Cheez</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | AlphaMed Clinical Laboratory</title>
+  <style>
+    body { margin:0; font-family: Arial, sans-serif; background: linear-gradient(135deg, #1e3a8a, #2563eb); display:flex; align-items:center; justify-content:center; height:100vh; color:white; }
+    .box { background:white; color:#111; border-radius:12px; padding:30px; width:320px; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,0.2); }
+    input { width:100%; padding:10px; margin:10px 0; border:1px solid #ccc; border-radius:6px; }
+    button { width:100%; padding:10px; background:#2563eb; border:none; border-radius:6px; color:white; font-size:15px; cursor:pointer; }
+    button:hover { background:#1e3a8a; }
+  </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/"><img src="/public/logo.png" alt="logo" height="36"> Mellow Cheez</a>
-    <div class="ms-auto">
-      <a href="/admin.html" class="btn btn-warning">Admin</a>
-    </div>
+  <div class="box">
+    <img src="logo.png" alt="logo" style="height:56px;margin-bottom:8px"/>
+    <h2>AlphaMed Login</h2>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <div style="font-size:13px;margin-top:10px;color:#666">Default admin: <strong>admin / admin123</strong></div>
   </div>
-</nav>
 
-<div class="container my-4">
-  <h1 id="restName">Mellow Cheez</h1>
-  <p id="restDesc"></p>
-
-  <h3>Menu</h3>
-  <div id="menuList" class="row"></div>
-
-  <h3>Deals</h3>
-  <div id="dealsList" class="row"></div>
-
-  <h3>Cart</h3>
-  <div id="cartWrap"></div>
-  <button id="checkoutBtn" class="btn btn-success">Place Order</button>
-</div>
-
-<script>
-const API_BASE = "";
-
-async function fetchJSON(url, opts){ const r = await fetch(url, opts); return r.json(); }
-
-async function loadSettings(){
-  const s = await fetchJSON("/api/settings");
-  document.getElementById("restName").innerText = s.name || "Restaurant";
-  document.getElementById("restDesc").innerText = s.description || "";
-}
-async function loadMenu(){
-  const list = await fetchJSON("/api/menu");
-  const wrap = document.getElementById("menuList"); wrap.innerHTML = "";
-  list.forEach(it=>{
-    const col = document.createElement("div"); col.className="col-md-4";
-    col.innerHTML = `<div class="card mb-2"><img src="${it.img_url}" class="card-img-top" style="height:160px;object-fit:cover"><div class="card-body"><h5>${it.name}</h5><p>${it.description}</p><div><strong>$${it.price.toFixed(2)}</strong></div><button class="btn btn-primary add" data-id="${it.id}" data-name="${it.name}" data-price="${it.price}">Add</button></div></div>`;
-    wrap.appendChild(col);
-  });
-  document.querySelectorAll(".add").forEach(b=> b.addEventListener("click", e=>{
-    const id = e.target.dataset.id; const name = e.target.dataset.name; const price = Number(e.target.dataset.price);
-    const cart = JSON.parse(localStorage.getItem("ff_cart")||"[]");
-    cart.push({id,name,price,qty:1});
-    localStorage.setItem("ff_cart", JSON.stringify(cart));
-    renderCart();
-  }));
-}
-
-async function loadDeals(){
-  const list = await fetchJSON("/api/deals");
-  const wrap = document.getElementById("dealsList"); wrap.innerHTML = "";
-  list.forEach(d=>{
-    const col = document.createElement("div"); col.className="col-md-4";
-    col.innerHTML = `<div class="card mb-2"><img src="${d.img_url}" class="card-img-top" style="height:160px;object-fit:cover"><div class="card-body"><h5>${d.title}</h5><div><strong>$${d.price.toFixed(2)}</strong></div><button class="btn btn-warning adddeal" data-id="${d.id}" data-title="${d.title}" data-price="${d.price}">Add Deal</button></div></div>`;
-    wrap.appendChild(col);
-  });
-  document.querySelectorAll(".adddeal").forEach(b=> b.addEventListener("click", e=>{
-    const id = e.target.dataset.id; const title = e.target.dataset.title; const price = Number(e.target.dataset.price);
-    const cart = JSON.parse(localStorage.getItem("ff_cart")||"[]");
-    cart.push({id, name:title, price, qty:1, deal:true});
-    localStorage.setItem("ff_cart", JSON.stringify(cart));
-    renderCart();
-  }));
-}
-
-function renderCart(){
-  const wrap = document.getElementById("cartWrap"); const cart = JSON.parse(localStorage.getItem("ff_cart")||"[]");
-  if(cart.length===0){ wrap.innerHTML="<div class='text-muted'>Cart empty</div>"; return; }
-  let html = "<ul class='list-group'>";
-  let total=0;
-  cart.forEach((c,i)=>{ total += c.price*c.qty; html += `<li class='list-group-item'>${c.qty} × ${c.name} — $${c.price.toFixed(2)} <button data-i='${i}' class='btn btn-sm btn-danger float-end remove'>Remove</button></li>`; });
-  html += `</ul><div class="mt-2"><strong>Total: $${total.toFixed(2)}</strong></div>`;
-  wrap.innerHTML = html;
-  document.querySelectorAll(".remove").forEach(b=> b.addEventListener("click", e=>{ const i = e.target.dataset.i; const cart = JSON.parse(localStorage.getItem("ff_cart")||"[]"); cart.splice(i,1); localStorage.setItem("ff_cart", JSON.stringify(cart)); renderCart(); }));
-}
-
-document.getElementById("checkoutBtn").addEventListener("click", async ()=>{
-  const cart = JSON.parse(localStorage.getItem("ff_cart")||"[]");
-  if(cart.length===0) return alert("Cart empty");
-  const res = await fetch("/api/orders", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({items:cart, customer:{name:"Guest"}})});
-  const data = await res.json();
-  if(data.error) return alert("Error: "+data.error);
-  alert("Order placed! ID: " + data.id);
-  localStorage.removeItem("ff_cart"); renderCart();
-});
-
-// init
-loadSettings(); loadMenu(); loadDeals(); renderCart();
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-<script>
-function formatOrderSlip(order){
-  // Simple slip content (plain text + minimal formatting) for thermal printers or PDF
-  const lines = [];
-  lines.push("=== " + (order.restaurant || "Restaurant") + " ===");
-  lines.push("Order ID: " + order.id);
-  lines.push("Date: " + new Date(order.created_at || Date.now()).toLocaleString());
-  lines.push("--------------------------------");
-  order.items.forEach(it=>{
-    lines.push((it.qty || 1) + " x " + it.name + "  $" + (it.price || 0).toFixed(2));
-  });
-  lines.push("--------------------------------");
-  lines.push("Total: $" + (order.total || 0).toFixed(2));
-  lines.push("");
-  lines.push("Thank you for your order!");
-  return lines.join("\n");
-}
-
-async function downloadOrderPDF(order){
-  // order: object with items, total, id
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({unit:"pt", format:"a4"});
-  const text = formatOrderSlip(order);
-  const margin = 40;
-  const lines = doc.splitTextToSize(text, 500);
-  doc.setFontSize(12);
-  doc.text(lines, margin, margin);
-  const name = "order_"+(order.id || Date.now())+".pdf";
-  doc.save(name);
-}
-
-function downloadOrderCSV(order){
-  const rows = [["Order ID", order.id], ["Date", new Date(order.created_at || Date.now()).toLocaleString()], [], ["Qty","Item","Price"]];
-  order.items.forEach(it=>{
-    rows.push([it.qty || 1, it.name, (it.price || 0).toFixed(2)]);
-  });
-  rows.push([], ["Total", "", (order.total || 0).toFixed(2)]);
-  const csv = rows.map(r => r.map(c => '"' + ((""+c).replace(/"/g,'""')) + '"').join(",")).join("\n");
-  const blob = new Blob([csv], {type: "text/csv;charset=utf-8;"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "order_"+(order.id || Date.now())+".csv";
-  document.body.appendChild(a); a.click(); a.remove();
-}
-
-function printOrderSlip(order){
-  // Open a new window with formatted slip optimized for thermal width and call print()
-  const html = `
-  <html><head>
-    <title>Print Slip</title>
-    <style>
-      @media print {
-        body { font-family: monospace; font-size: 12pt; }
+  <script>
+    // seed default admin user if not exists
+    (function(){
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      if(!users.some(u=>u.user==='admin')){
+        users.push({ user: 'admin', pass: 'admin123', role: 'admin', name: 'Administrator', created: new Date().toISOString() });
+        users.push({ user: 'dr', pass: 'doctor123', role: 'doctor', name: 'Doctor', created: new Date().toISOString() });
+        users.push({ user: 'tech', pass: 'tech123', role: 'technician', name: 'Technician', created: new Date().toISOString() });
+        users.push({ user: 'reception', pass: 'reception123', role: 'reception', name: 'Reception', created: new Date().toISOString() });
+        localStorage.setItem('users', JSON.stringify(users));
       }
-      body { font-family: monospace; width: 280px; margin: 0; padding: 10px; }
-      .center { text-align: center; }
-      .line { border-top:1px dashed #000; margin:8px 0; }
-    </style>
-  </head>
-  <body>
-    <div class="center"><strong>${order.restaurant || 'Restaurant'}</strong></div>
-    <div>Order ID: ${order.id}</div>
-    <div>Date: ${new Date(order.created_at || Date.now()).toLocaleString()}</div>
-    <div class="line"></div>
-    ${order.items.map(it=>`<div>${it.qty} x ${it.name}  $${(it.price||0).toFixed(2)}</div>`).join("")}
-    <div class="line"></div>
-    <div><strong>Total: $${(order.total||0).toFixed(2)}</strong></div>
-    <div style="margin-top:12px" class="center">Thank you!</div>
-  </body></html>`;
-  const w = window.open("", "_blank", "width=320,height=600");
-  w.document.write(html);
-  w.document.close();
-  w.focus();
-  // give a short delay then print
-  setTimeout(()=>{ w.print(); /* w.close(); */ }, 500);
-}
+    })();
 
-// Hook into checkout flow: after successful order placement, enable download/print buttons
-const originalCheckout = window.fetch;
-document.addEventListener("DOMContentLoaded", ()=>{
-  const checkoutBtn = document.getElementById("checkoutBtn");
-  if(checkoutBtn){
-    checkoutBtn.addEventListener("click", async ()=>{
-      const cart = JSON.parse(localStorage.getItem("ff_cart")||"[]");
-      if(cart.length===0) return alert("Cart empty");
-      const res = await fetch("/api/orders", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({items:cart, customer:{name:"Guest"}})});
-      const data = await res.json();
-      if(data.error) return alert("Error: "+data.error);
-      // Prepare order object shaped for slip functions
-      const order = { id: data.id || data.lastID || data.insertId || Date.now(), items: cart, total: cart.reduce((s,i)=>s+(i.price||0)*(i.qty||1),0), created_at: data.created_at || new Date().toISOString(), restaurant: document.getElementById('restName') ? document.getElementById('restName').innerText : "Restaurant" };
-      // Show options
-      const cont = document.getElementById("cartWrap");
-      const html = "<div class='alert alert-success'>Order placed! ID: "+order.id+"<br><button class='btn btn-sm btn-primary me-2' id='printSlipBtn'>Print Slip</button><button class='btn btn-sm btn-secondary me-2' id='downloadPdfBtn'>Download PDF</button><button class='btn btn-sm btn-outline-secondary' id='downloadCsvBtn'>Download CSV</button></div>";
-      cont.insertAdjacentHTML('afterbegin', html);
-      document.getElementById("printSlipBtn").addEventListener("click", ()=>printOrderSlip(order));
-      document.getElementById("downloadPdfBtn").addEventListener("click", ()=>downloadOrderPDF(order));
-      document.getElementById("downloadCsvBtn").addEventListener("click", ()=>downloadOrderCSV(order));
-      localStorage.removeItem("ff_cart"); renderCart();
-    });
-  }
-});
-</script>
-</body></html>
+    function login(){
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const found = users.find(x=>x.user===u && x.pass===p);
+      if(!found) return alert('Invalid login!');
+      localStorage.setItem('loggedUser', JSON.stringify(found));
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>

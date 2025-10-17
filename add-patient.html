@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Add Patient | AlphaMed</title>
+<style>body{font-family:Arial,Helvetica,sans-serif;margin:0;background:linear-gradient(135deg,#1e3a8a,#2563eb);min-height:100vh} .container{max-width:800px;margin:40px auto;background:#fff;padding:25px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.2)} label{font-weight:600;color:#1e3a8a} input,select,textarea{width:100%;padding:8px;margin:6px 0;border-radius:6px;border:1px solid #ccc} button{background:#2563eb;color:#fff;padding:10px;border:none;border-radius:6px;cursor:pointer;width:100%} .back{text-align:center;margin-top:10px;display:block;color:#2563eb;text-decoration:none}</style></head>
+<body>
+<div class="container">
+  <h2 style="text-align:center;color:#1e3a8a">Register New Patient</h2>
+  <label>Patient Code</label><input id="patient_code" readonly>
+  <label>Full Name</label><input id="full_name">
+  <label>Age</label><input id="age" type="number">
+  <label>Gender</label><select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
+  <label>Mobile</label><input id="mobile">
+  <label>Referred By</label><input id="referred_by">
+  <label>Department</label><select id="department"></select>
+  <label>Sample Type</label><input id="sample_type" placeholder="Blood / Urine">
+  <label>Address</label><textarea id="address" rows="2"></textarea>
+  <label>Remarks</label><textarea id="remarks" rows="2"></textarea>
+  <button onclick="savePatient()">Save Patient</button>
+  <a class="back" href="dashboard.html">← Back to Dashboard</a>
+</div>
+<script>
+const user = JSON.parse(localStorage.getItem('loggedUser')||'null'); if(!user){alert('Please login');window.location='index.html'}
+function genCode(){ document.getElementById('patient_code').value = 'P-'+Date.now(); }
+function loadDepts(){ const d=JSON.parse(localStorage.getItem('departments')||'[]'); const sel=document.getElementById('department'); sel.innerHTML='<option value="">Select Department</option>'; if(d.length===0){['Hematology','Clinical Chemistry','Microbiology','Serology'].forEach(x=>sel.innerHTML+='<option>'+x+'</option>')} else d.forEach(x=>sel.innerHTML+='<option>'+x.name+'</option>') }
+function savePatient(){ const p={ id:Date.now(), patient_code:document.getElementById('patient_code').value, full_name:document.getElementById('full_name').value.trim(), age:document.getElementById('age').value, gender:document.getElementById('gender').value, mobile:document.getElementById('mobile').value.trim(), referred_by:document.getElementById('referred_by').value.trim(), department:document.getElementById('department').value, sample_type:document.getElementById('sample_type').value, address:document.getElementById('address').value, remarks:document.getElementById('remarks').value, collected_at:new Date().toISOString() }; if(!p.full_name||!p.age||!p.gender||!p.department){alert('Fill required fields');return} const patients=JSON.parse(localStorage.getItem('patients')||'[]'); patients.push(p); localStorage.setItem('patients',JSON.stringify(patients)); const logs=JSON.parse(localStorage.getItem('activityLog')||'[]'); logs.push({time:new Date(),text:'Patient added: '+p.full_name+' ('+p.patient_code+')'}); localStorage.setItem('activityLog',JSON.stringify(logs)); alert('Patient saved'); window.location='dashboard.html' }
+loadDepts(); genCode();
+</script>
+<script src="app.js"></script>
+</body></html>

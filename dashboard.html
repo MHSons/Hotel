@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | AlphaMed Clinical Laboratory</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:linear-gradient(135deg,#1e3a8a,#2563eb);min-height:100vh;color:#fff}
+    .wrap{max-width:1100px;margin:28px auto;padding:18px}
+    .card{background:#fff;color:#111;border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:0 6px 18px rgba(16,24,40,0.15)}
+    header{display:flex;align-items:center;justify-content:space-between;color:white;margin-bottom:18px}
+    .branding{display:flex;align-items:center;gap:12px}
+    .branding img{height:56px;border-radius:8px;background:white;padding:6px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .btn{background:#2563eb;color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    a.link{display:block;margin:8px 0;background:#2563eb;color:white;padding:10px;border-radius:8px;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="branding"><img src="logo.png" alt="logo"><div><h1 style="margin:0">AlphaMed Clinical Laboratory</h1><div style="font-size:13px;color:#fff">amcl@gmail.com • 0339-8067880</div></div></div>
+      <div>
+        <div id="userName" style="font-weight:600"></div>
+        <div style="margin-top:6px"><button class="btn" onclick="logout()">Logout</button></div>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2 style="margin:0;color:#1e3a8a">Dashboard</h2>
+      <p class="small">Quick actions and overview</p>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <a class="link" href="add-patient.html">+ Add Patient</a>
+        <a class="link" href="patients.html">Patient Records</a>
+        <a class="link" href="add-result.html">Add Test Result</a>
+        <a class="link" href="departments.html">Departments & Tests</a>
+        <a class="link" href="users.html">Users</a>
+        <a class="link" href="settings.html">Settings</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0">Recent Activity</h3>
+      <div id="activityLog" style="margin-top:10px;color:#444"></div>
+    </div>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('loggedUser') || 'null');
+    if(!user){ alert('Please login first!'); window.location.href='index.html'; }
+    document.getElementById('userName').innerText = (user.name || user.user) + ' (' + user.role + ')';
+    const logs = JSON.parse(localStorage.getItem('activityLog') || '[]').slice().reverse();
+    document.getElementById('activityLog').innerHTML = logs.slice(0,10).map(l=> new Date(l.time).toLocaleString()+': '+l.text).join('<br>');
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>
